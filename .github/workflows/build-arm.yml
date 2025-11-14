@@ -13,11 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Free disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android "$AGENT_TOOLSDIRECTORY"
-          docker system prune -af || true
-          docker builder prune -af || true
+      - name: Free some space anyway
+        run: sudo rm -rf /usr/share/dotnet /opt/ghc "$AGENT_TOOLSDIRECTORY" && docker system prune -af
           
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
