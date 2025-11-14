@@ -11,10 +11,17 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v5
-      
       - name: Maximize build space
-        uses: easimon/maximize-build-space@v10
+        uses: easimon/maximize-build-space@master
+        with:
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          root-reserve-mb: 4096
+          swap-size-mb: 0
+
+      - uses: actions/checkout@v4
       
       - name: Free some space anyway
         run: docker system prune -af
